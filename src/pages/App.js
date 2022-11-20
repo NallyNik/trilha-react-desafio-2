@@ -16,29 +16,24 @@ function App() {
 
   const handleSearchRepo = async () => {
 
-    const {data} = await api.get(`repos/${currentRepo}`)
+    const {data} = await api.get(`repos/${currentRepo}`);
 
     if(data.id){
-
       const isExist = repos.find(repo => repo.id === data.id);
 
       if(!isExist){
         setRepos(prev => [...prev, data]);
-        setCurrentRepo('')
+        setCurrentRepo('');
         return
       }
-
+      alert('Repositório já adicionado!')
+    } 
+     
     }
-    alert('Repositório não encontrado')
-
+    
+    const handleRemoveRepo = (id) => {
+    setRepos(repos => repos.filter(repo => repo.id !== id));
   }
-
-  const handleRemoveRepo = (id) => {
-    console.log('Removendo registro', id);
-
-    // utilizar filter.
-  }
-
 
   return (
     <Container>
